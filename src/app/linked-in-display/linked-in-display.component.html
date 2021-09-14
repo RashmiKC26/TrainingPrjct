@@ -1,11 +1,12 @@
 <!-- <p>linked-in-display works!</p> -->
 <form #linkedinplayForm ="ngForm">
     <div style="height: 400px;overflow: auto;">
-<div class="displaydiv" *ngFor="let list of posteditem ;let i = index;">
-    <div style="font-family: system-ui;
-    font-size: 15px;">
+    <div class="displaydiv" *ngFor="let list of posteditem ;let i = index;">
+
+    <div style="font-family: system-ui;font-size: 15px;">   
         {{list.inputText}}
     </div>
+
     <div>
         <br>
          <button class="btn1" type="submit" (click)="enableLikeButton(i,list.id,list.highlightTrue)" 
@@ -14,31 +15,27 @@
          
          <button class="btn2" type="submit" (click)="enableCmtBox(i)"> Comment </button>
          <br>
-   
          <br>
-         <div [ngStyle]="{'display': enablecmntbox && cmtindex == i? 'block' : 'none' }" style="margin-top: 10px;">
-            <label style="font-family: system-ui;font-size: 13px;">Comments</label>
-            
-            <textarea  class="textbox" type="text" name="commentText" placeholder="Add a comment.." rows="3" cols="50"[(ngModel)]="linkedinCommentData.comments" > </textarea>
-            
-           
+         <div *ngIf="cmtindex === i" [ngStyle]="{'display': enablecmntbox && cmtindex == i? 'block' : 'none' }" 
+         style="margin-top: 10px;">
+            <label style="font-family: system-ui;font-size: 13px;">Comments</label>          
+            <textarea  class="textbox" type="text" name="commentText" placeholder="Add a comment.." rows="3" cols="50"[(ngModel)]="linkedinCommentData.comments" > </textarea>                  
             <div>
-                <button class="btncmtpost" type="submit" (click)="saveComments(i,list.id)"> Send </button>
+                <button class="btncmtpost" type="submit" [disabled]="linkedinplayForm.form.invalid" (click)="saveComments(i,list.id)"> Send </button>
             </div> 
-         
-            
+                     
             <div style="height: 110px;
             overflow: auto;">
-            <div class ="cmntdiv" *ngFor="let listcmt of list.linkedInComments"  >
+                <div class ="cmntdiv" *ngFor="let listcmt of list.linkedInComments"  >
                 {{listcmt.comments}}
-            </div>
-        </div> 
+                </div>
+            </div> 
          </div>
     </div>
 </div>
 
 <div *ngIf="posteditem === undefined || posteditem.length ===0" style="text-align: center;">
-No Posts yet
+    No Posts yet
 </div>
 </div>
 </form>

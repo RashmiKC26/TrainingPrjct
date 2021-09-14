@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { LinkedInService } from '../linked-in.service';
-import { LinkedIn, LinkedInComments, LinkedInLike, LinkedInList } from '../models/linkedin';
+import {  LinkedInComments, LinkedInLike } from '../models/linkedin';
 
 @Component({
   selector: 'app-linked-in-display',
@@ -14,10 +14,10 @@ highlightTrue:boolean =false;
 cmtindex:number | undefined;
 likeindex:number | undefined;
 liked:boolean =false;
+disablebtn:boolean =false;
 linkedinlikeData: LinkedInLike = new LinkedInLike();
 linkedinCommentData: LinkedInComments = new LinkedInComments();
   constructor(public linkedinService : LinkedInService) {    
-    console.log('this.posteditem',this.posteditem);
   }
 
   ngOnInit(): void {
@@ -41,12 +41,15 @@ linkedinCommentData: LinkedInComments = new LinkedInComments();
   // }
 
   saveComments(i:number|undefined,id:number|undefined):void{
-    this.linkedinService.saveCommentPost(id,this.linkedinCommentData).subscribe(result=>{
-      this.linkedinService.getAllList().subscribe(cmt=>{
-        this.posteditem =cmt;
-      })
-      this.linkedinCommentData.comments ="";
-    });
+      this.disablebtn=false;
+      this.linkedinService.saveCommentPost(id,this.linkedinCommentData).subscribe(result=>{
+        this.linkedinService.getAllList().subscribe(cmt=>{
+          this.posteditem =cmt;
+        })
+        this.linkedinCommentData.comments ="";
+      });
+   
+   
   }
   //[-][save comments]
 
@@ -67,13 +70,12 @@ linkedinCommentData: LinkedInComments = new LinkedInComments();
 
       this.linkedinService.saveLikedPost(id,this.linkedinlikeData).subscribe(result=>{
       this.linkedinService.getAllList().subscribe(list=>{
-      this.posteditem =list
+      this.posteditem =list;
   
     })
   });
 
  //[-][save like post]
-
 
   }
 

@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-
 import { LinkedInService } from '../linked-in.service';
 import { LinkedIn, LinkedInList } from '../models/linkedin';
-import { Student } from '../models/student';
-import { StudentServiceService } from '../student-service.service';
+
 
 @Component({
   selector: 'app-linked-in-entry',
@@ -27,11 +25,11 @@ export class LinkedInEntryComponent implements OnInit {
 
   ngOnInit(): void {
     this.routes.data.subscribe(linkedIdDataList=>{
-      console.log("linkedIdDataList",linkedIdDataList);
       this.lists = linkedIdDataList.linkedIdData as Array<LinkedInList>;
     })
    
-    this.getAllList();
+   // this.getAllList();
+  
   }
  
 
@@ -53,7 +51,7 @@ public getAllList(){
 
 //[+][post linkedin]
 insertRecord(lnform:any):void {
-  if(!lnform.form.valid){
+  if(!lnform.form.valid){ 
      return;
   }else{
    this.linkedinService.postData(this.linkedinData).subscribe(result=>{
@@ -61,6 +59,7 @@ insertRecord(lnform:any):void {
        this.lists = list
      })
    });
+   this.linkedinData.inputText='';
   }
 }
 //[-][post linkedin]
