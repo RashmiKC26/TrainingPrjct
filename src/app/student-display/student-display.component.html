@@ -1,0 +1,36 @@
+<p>student-display works!</p>
+<table>
+    <thead>
+            <th>RollNumber</th>
+            <th>Name</th>
+            <th>IQ</th>
+            <th>Action</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of students">
+        <td>
+            {{item.rollNumber}}
+        </td>
+        <td>
+            {{item.name | propername}}
+        </td>
+        <td>
+            {{item.iQ}}
+        </td>
+        <td>
+            <button type="button" (click)="EditStudent(item)">Edit</button>
+            <button type="button" (click)="DeleteStudent(item)">Delete</button>
+        </td>
+        </tr>
+    </tbody>
+    </table>
+    <ul>
+        <li *ngFor ="let item of students">
+{{item}}
+        </li>
+    </ul>
+    <ul>
+        <ng-template>
+            
+        </ng-template>
+    </ul>

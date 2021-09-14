@@ -1,0 +1,20 @@
+<p style="text-align: center;font-size: 22px;"> Mini LinkedIn Form!</p>
+<li><a routerLink="/profile-entry" routerLinkActive="active">View Profile</a></li>
+<form  #linkedForm ="ngForm">
+<div class="maindiv">
+    <div style="padding: 4px;">
+    <textarea class ="form-control ng-invalid" required class="inputcls" 
+     type="text" name="inputText"  #rno="ngModel" [(ngModel)]="linkedinData.inputText" required>
+    </textarea>
+    <span class="red" [hidden]="rno.valid || rno.pristine ">Please enter text to post</span>
+<br>
+    <button class="btn" [disabled]="linkedForm.form.invalid" type="submit" (click)="insertRecord(linkedForm)" > Post </button>
+      
+</div>
+
+<div>
+    <app-linked-in-display [posteditem]= "lists"></app-linked-in-display>
+ 
+    </div>
+</div>
+</form>

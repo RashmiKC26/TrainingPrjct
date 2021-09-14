@@ -1,0 +1,61 @@
+<p>student-entry works!</p>
+<form >
+
+    <div>
+        <span> Roll Number:</span>
+        <input type="number"  name="roll"  [(ngModel)] ="student.rollNumber" />       
+    </div>
+
+    <div>
+        <span> Nane:</span>
+        <input type="text"  name="name"  [(ngModel)] ="student.name" />             
+    </div>
+
+    <div>
+        <span> IQ:  </span>
+        <input type="number" name="IQ" [(ngModel)] ="student.iQ">
+        </div>
+
+        <button type="submit"  name="btnsubmit" (click)="saveData()">
+            submit
+        </button>
+
+           
+</form> 
+
+ <app-student-display [students]= students (editStudent)="EditStudent($event)" (deleteStudent)="DeleteStudent($event)"></app-student-display>
+
+<!-- //[+][Template forms] -->
+
+<!-- <form (ngSubmit) = "saveData()" #studentForm ="ngForm"> -->
+    <!-- <form  #studentForm ="ngForm">
+    <div>
+        <span> Roll Number:</span>
+        <input type="number" #rno="ngModel" class ="form-control ng-invalid" name="RollNumber"
+         [(ngModel)] ="student.rollNumber" required />
+         <span [hidden]="rno.valid || rno.pristine">Roll Number is Required</span>
+    </div>
+
+    <div>
+        <span> Nane:  </span>
+        <input type="text" #sname="ngModel" class ="form-control ng-invalid" name="Name"
+        [(ngModel)] ="student.name" required />
+        <span [hidden]="sname.valid || sname.pristine || IsProperName(sname.value)">Name is Required</span>
+        <span [hidden]="sname.valid || sname.pristine || *ngIf = "IsProperName(sname.value)">Name is Required</span>
+    </div>
+
+    <div>
+        <span> IQ:</span>
+        <input type="number" name="IQ" [(ngModel)] ="student.iQ"/>
+    </div>
+
+        <button type="submit" [disabled] ="!studentForm.form.valid" name="btnSubmit" (click)="saveData()" >
+            submit
+        </button>
+
+     </form>
+           
+        <app-student-display [students]= students (editStudent)="EditStudent($event)" (deleteStudent)="DeleteStudent($event)">
+            <h1>Hello World!</h1>
+        </app-student-display>  -->
+<!-- //[-][Template forms] -->

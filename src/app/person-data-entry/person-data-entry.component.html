@@ -1,0 +1,91 @@
+<p>person-data-entry works!</p>
+<!-- <form>
+    <p>
+        <span>Name</span>   
+        <input type="text" name="name" [(ngModel)]="Name" />
+    </p>
+    
+    <p>
+        <span>AGE</span>
+        <input type="text" name="age" [(ngModel)]="Age" />
+    </p>
+    
+    <button type="submit" (click)="showData()">
+        Click here
+    </button>
+
+
+    <label>Display List</label>
+    <p>my name is {{Name}},  my age is {{Age}}</p>
+
+    <ul>
+        <li *ngFor = "let i of Persons">
+           Name:{{i.Name}} Age:{{i.Age}}
+           <app-person-data-display [person]= "i"></app-person-data-display>
+        </li>
+    </ul>
+  
+
+    <ul>
+        <li *ngFor = "let i of PersonsArray">
+           Name:{{i.Name}} Age:{{i.Age}}
+        </li>
+    </ul>
+</form> -->
+
+ 
+<form [formGroup] = "personForm"> 
+    <p>
+        <span>Name</span>   
+        <input type="text" class= "form-control" name="name" formControlName="Name" />
+        <!-- <span [hidden]="personForm.Name.pristine || personForm.Name.valid">Name is Required</span> -->
+    </p>
+    
+    <p>
+        <span>AGE</span>
+        <input type="number" name="age" formControlName="Age" />
+        <!-- <span [hidden]="personForm.Age.pristine || personForm.Age.valid">Age is Required</span> -->
+    </p>
+    
+        <div formGroupName = "Address">
+            <!-- <lable>Street 1</lable>          -->
+            Street 1
+            <input type="text" name="street" formControlName="Street1" />
+            <br>
+            <!-- <lable>City</lable> -->
+            City           
+            <input type="text" name="city" formControlName="City" />
+        </div>
+  
+        <div formArrayName = "WorkHistory">
+            <div *ngFor="let wh of workHistoryArray">
+            <!-- <lable>Compnay Name</lable> -->
+            Compnay Name
+            <input type="text" formControlName="wh.CompanyName" />     
+            Start Date
+            <input type="text" formControlName="wh.StartDate" />        
+            </div>          
+        </div>
+
+        <br>
+    <button type="submit" [disabled]="!personForm.valid" (click)="AddWorkHistory()">
+        Click here
+    </button>
+</form>
+<!-- 
+    <label>Display List</label>
+    <p>my name is {{Name}},  my age is {{Age}}</p>
+
+    <ul>
+        <li *ngFor = "let i of Persons">
+           Name:{{i.Name}} Age:{{i.Age}}
+           <app-person-data-display [person]= "i"></app-person-data-display>
+        </li>
+    </ul>
+  
+
+    <ul>
+        <li *ngFor = "let i of PersonsArray">
+           Name:{{i.Name}} Age:{{i.Age}}
+        </li>
+    </ul> -->
