@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 import { LinkedInService } from '../linked-in.service';
@@ -17,12 +17,14 @@ export class LinkedInEntryComponent implements OnInit {
   postData:string="";
   linkedinData: LinkedIn = new LinkedIn();
   public lists : Array<LinkedInList>;
-  public listPosts1 : any;
+  previewImage: string='';
+  
   constructor(
     public linkedinService : LinkedInService,
-    public readonly routes:ActivatedRoute
+    public readonly routes:ActivatedRoute,
+    public fb: FormBuilder
     ) { 
-        this.lists = new Array<LinkedInList>();
+        this.lists = new Array<LinkedInList>();      
       }
 
   ngOnInit(): void {
@@ -56,14 +58,38 @@ insertRecord(lnform:any):void {
   if(!lnform.form.valid){
      return;
   }else{
+  debugger;
+    this.linkedinData.ImageBase64=this.previewImage;
    this.linkedinService.postData(this.linkedinData).subscribe(result=>{
      this.linkedinService.getAllList().subscribe(list=>{
        this.lists = list
      })
    });
+   this.linkedinData.inputText='';
+   this.linkedinData.ImageBase64='';
+   this.previewImage='';
+   lnform.form.controls.filename='';
+
   }
-  this.linkedinData.inputText="";
 }
 //[-][post linkedin]
+
+onFileChange(event:any) {
+
+  const fileControl = event.target as HTMLInputElement;
+  if (!fileControl || !fileControl.files || fileControl.files.length<=0) {
+    return;
+  }
+
+  const file = fileControl.files[0];
+  
+  // File Preview
+  const reader = new FileReader();
+  reader.onload = () => {
+    this.previewImage = reader.result as string;
+  }
+  reader.readAsDataURL(file);
+}
+
 
 }

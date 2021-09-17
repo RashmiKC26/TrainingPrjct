@@ -6,6 +6,12 @@
     font-size: 15px;">
         {{list.inputText}}
     </div>
+
+    <div *ngIf ="list.imageBase64" class="preview">
+        <img [src]="list.imageBase64" [alt]="">
+      </div>
+
+
     <div>
         <br>
          <button class="btn1" type="submit" (click)="enableLikeButton(i,list.id,list.highlightTrue)" 

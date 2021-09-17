@@ -1,9 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
 .maindiv1{
     border: 1px solid;
-    height: 700px;
+    height: 36rem;
     width: 65%;
-   overflow: auto;
+    overflow-y: hidden;
     margin-left: 16rem;
     padding: 23px;
+}
+
+.preview{
+    margin-top: 20px;
+}
+
+.preview {
+  width: 200px;
+  height:200px;
+  border:solid
+}
+
+.preview img {
+   width: 100%;
+   height: 100%;
+   object-fit: contain;
 }

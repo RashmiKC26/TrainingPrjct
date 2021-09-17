@@ -8,8 +8,12 @@
     </textarea>
     <!-- <span class="red" [hidden]="rno.valid || rno.pristine ">Please enter text to post</span> -->
 <br>
-    <button class="btn" [disabled]="linkedForm.form.invalid" type="submit" (click)="insertRecord(linkedForm)" > Post </button>
-      
+<div class="preview" *ngIf="previewImage && previewImage !== null">
+    <img [src]="previewImage" [alt]="">
+  </div>
+    <button class="btn" type="submit" (click)="insertRecord(linkedForm)" > Post </button>
+    <input type="file"  id="file" name="filename" placeholder="Select file" [(ngModel)]="linkedinData.ImageBase64"
+    (change)="onFileChange($event)" />
 </div>
 
 <div>
@@ -18,3 +22,5 @@
     </div>
 </div>
 </form>
+
+

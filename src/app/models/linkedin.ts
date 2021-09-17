@@ -2,6 +2,7 @@ export class LinkedIn
 {
     public id :number | undefined
     public inputText:string = "";
+    public ImageBase64:string ='';
 
 }
 
